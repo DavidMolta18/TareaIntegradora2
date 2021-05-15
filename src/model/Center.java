@@ -342,7 +342,7 @@ public class Center {
 
 					petarray[i].setStatus(Status.EXIT_WITHOUT_ATTENTION);
 			
-					System.out.println("The pet left the center!");
+					System.out.println("The pet exit the center without attention!");
 					petNumber--;
 					System.out.println("There are currently "+ petNumber + " pets");
 					exit=true;
