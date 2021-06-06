@@ -32,10 +32,7 @@ public class Center {
 * Description: A constant with the maximum number of pets
 */
 	private final int MAX_PETS=120;
-/**
-* Description: A var to save the name of the pet center
-*/
-	private String petCenterName;
+
 /**
 * Description: Position to save the pet that is next
 */
@@ -75,36 +72,164 @@ public class Center {
 */
 	private int totalPriority5;
 
+/**
+* Description: Matrix to save the animals
+*/
+	private Habitat [][]habitatMatrix;
+
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+
+	private final int MAXCOLCAT = 2;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINCOLCAT= 0;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXROWCAT = 2;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINROWCAT= 0;
+
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXCOLDOG = 2;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINCOLDOG= 0;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXROWDOG = 5;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINROWDOG= 3;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXCOLREPTILE = 4;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINCOLREPTILE= 3;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXROWREPTILE =1;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINROWREPTILE= 0;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXCOLBUNNY = 4;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINCOLBUNNY= 3;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXROWBUNNY =3;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINROWBUNNY= 2;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXCOLBIRD = 4;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINCOLBIRD= 3;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MAXROWBIRD =5;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final int MINROWBIRD= 4;
+/**
+* Description: Constant to control the limits of the habitatMatrix
+*/
+	private final double MAXHABITATS = 30;
+/**
+* Description: var to count the amount of habitats that are occupied by a dog
+*/
+	private double dogCount=0;
+/**
+* Description: var to count the amount of habitats that are occupied by a bunny
+*/
+	private double bunnyCount=0;
+/**
+* Description:var to count the amount of habitats that are occupied by a bird
+*/
+	private double birdCount=0;
+/**
+* Description: var to count the amount of habitats that are occupied by a reptile
+*/
+	private double reptileCount=0;
+/**
+* Description: var to count the amount of habitats that are occupied by a cat
+*/
+	private double catCount=0;
+/**
+* Description: Var to store the amount of the total pets that are healthy
+*/
+	private double healthyPet=0;
+/**
+* Description: Var to store the amount of the total pets that are sick
+*/
+	private double sickPet=0;
+
+/**
+* Description: var to store the position of the pet that will be hospitalized
+*/
+	private int hospiPos=0;
+
+
 
 
 	// get
 
-	public String getCenterName () {
 
-		return petCenterName;
-	}
 
 	// Constructor
 
 	/**
    * Description: This is the constructor of the class center <br>
    * <b> pre:</b> User must enter a name in the menu to start the center<br>
-   * <b> pos:</b> Initialize veterinaryarray,petarray,noattended,petNumber,veterinaryNumber // the pet center has now a name  <br>
+   * <b> pos:</b> Initialize veterinaryarray,petarray,noattended,petNumber,veterinaryNumber,habitatMatrix and call all the methods to initialize the animal habitats  <br>
    * @param name String
    */
 
 
-	public Center (String name) {
-	
+	public Center () {
 		veterinaryNumber=0;
 		petNumber=0;
-
-
-		petCenterName= name;
 
 		veterinaryarray= new Veterinary [MAX_VETS];
 		petarray= new Pet [MAX_PETS];
 		noattended=0;
+		// Initialization of the matrix habitat
+		habitatMatrix= new Habitat [6][5];
+
+		// Initialization of the habitats
+		initializateDog();
+		initializateBird();
+		initializateReptile();
+		initializateCat();
+		initializateBunny();
 	
 	}
 
@@ -429,7 +554,7 @@ public class Center {
 	/**
 	* Description: This method ends a consult
 	<b> pre: </b> The pet must be in consult, the vet must be in consult, the id of the vet must be associated with the name of the pet
-	<b> pos: </b> The consult is now finished, vet status changed from IN CONSULT to FREE and pet status changed from IN CONSULTATION to HOSPITALIZATION or AUTHORIZED DEPARTURE
+	<b> pos: </b> The consult is now finished, vet status changed from IN CONSULT to FREE and pet status changed from IN CONSULTATION to HOSPITALIZATION or AUTHORIZED DEPARTURE // hospiPos gets a value
 	* @param id String
 	* @param petName String
 	* @param option int 
@@ -445,6 +570,7 @@ public class Center {
 		String aId= id;
 		String apetName=petName;
 		int aOption=option;
+		int hospitalizationday=0;
 		
 
 		for (int i=0;!exit && i<MAX_VETS; i++) {
@@ -483,11 +609,12 @@ public class Center {
 
 
 				}else if (aOption==2) {
-
+ 					
 					petarray[a].setStatus(Status.HOSPITALIZATION);
 					veterinaryarray[position].setvetstatus(VetStatus.FREE);
 					System.out.println("The consult was successfully finished, now the vet: "+ veterinaryarray[position].getName()+" "+ veterinaryarray[position].getlastName()+" is ready to attend other pet");
-					System.out.println("The pet: "+ petarray[a].getPetName() + " is now hospitalized, we're sorry to hear that.");
+					hospiPos=a;
+
 					System.out.println("Pets waiting for attendance: " + noattended);
 					exit=true;
 
@@ -593,6 +720,13 @@ public class Center {
 		boolean exit=false;
 		int maxtotalconsult=0;
 		int positionmaxvet=0;
+		int novet=0;
+
+		for (int i=0;i<MAX_VETS;i++){
+			if(veterinaryarray[i]==null){
+				novet++;
+			}
+		}
 
 
 		for(int i=0 ; !false && i<MAX_PETS;i++){
@@ -619,7 +753,7 @@ public class Center {
 		}
 
 
-		if(!exit && totalPets!=0){
+		if(!exit){
 			System.out.println("Total pets attended per priority: " + "\n" +
 			"PRIORITY1: " + totalPriority1 + "\n" + 
 			"PRIORITY2: "+ totalPriority2 + "\n" +
@@ -630,14 +764,10 @@ public class Center {
 			double percentage = (leftnoattended/totalPets)*100;
 			System.out.println("Percentage of pets that left the center without being attended: "+ percentage + "%");
 
-			System.out.println("The veterinary with the greatest amount of patients attended was: " + veterinaryarray[positionmaxvet].getName() + " "+ veterinaryarray[positionmaxvet].getlastName() + " with a total of " + veterinaryarray[positionmaxvet].getNumberOfPatients()+ ", CONGRATULATIONS!");
-
-			for(int i=0; i<MAX_PETS;i++){ // DELETE ALL PETS
-				if(petarray[i]!=null && petarray[i].getStatus()!=Status.WAITING){
-					petarray[i]=null;
-				}
-
+			if(totalPets!=0 && novet!=7){
+				System.out.println("The veterinary with the greatest amount of patients attended was: " + veterinaryarray[positionmaxvet].getName() + " "+ veterinaryarray[positionmaxvet].getlastName() + " with a total of " + veterinaryarray[positionmaxvet].getNumberOfPatients()+ ", CONGRATULATIONS!");
 			}
+
 
 		}
 					
@@ -686,11 +816,570 @@ public class Center {
 	}
 
 
+
+	/**
+    * Description: This call the method addNurseryPet to the habitatMatrix<br>
+    * <b> pre:</b> endConsult needs to be called first<br>
+    * <b> pos:</b>hospiPos will now contain the position of the pet that will store the animal for hospitalization<br>
+    * @param days int, days that the pet will stay on the habitat
+    * @return out , String that contains a message of the addNurseryPet indicating if the pet was succesfully added or not
+    */
+
+	public String hospitalizate(int days){
+		String out="";
+		out=addNurseryPet(petarray[hospiPos].getPetName(),petarray[hospiPos].getPetAge(),petarray[hospiPos].getSpecie(),petarray[hospiPos].getOwner(),days,2);
+		return out;
+	}
+
+
+	// Initialization of the habitats
+
+	/**
+    * Description: This method will initialize the habitat were the dogs are going to be sent<br>
+    * <b> pre:</b> Constructor class must be activated first<br>
+    * <b> pos:</b> Dog habitat is now available to receive animals<br>
+    */
+
+	private void initializateDog (){
+		int id=1;
+		
+		for(int row=MINROWDOG; row<=MAXROWDOG; row++){
+			for(int col=MINCOLDOG; col<=MAXCOLDOG;col++){
+
+				habitatMatrix[row][col]= new DogHabitat ("D"+id,5.0,3.0,Usage.EMPTY,3);
+				id++;
+			}
+		}
+
+	}
+
+	/**
+    * Description: This method will initialize the habitat were the birds are going to be sent<br>
+    * <b> pre:</b> Constructor class must be activated first<br>
+    * <b> pos:</b> Bird habitat is now available to receive animals<br>
+    */
+
+	private void initializateBird (){
+		int id=1;
+		
+		for(int row=MINROWBIRD; row<=MAXROWBIRD; row++){
+			for(int col=MINCOLBIRD; col<=MAXCOLBIRD;col++){
+
+				habitatMatrix[row][col]= new BirdHabitat ("B"+id,6.5,5.3,Usage.EMPTY,5,8,CageType.LAND);
+				id++;
+			}
+		}
+		
+	}
+
+	/**
+    * Description: This method will initialize the habitat were the reptiles are going to be sent<br>
+    * <b> pre:</b> Constructor class must be activated first<br>
+    * <b> pos:</b> Reptile habitat is now available to receive animals<br>
+    */
+
+	private void initializateReptile (){
+		int id=1;
+		
+		for(int row=MINROWREPTILE; row<=MAXROWREPTILE; row++){
+			for(int col=MINCOLREPTILE; col<=MAXCOLREPTILE;col++){
+
+				habitatMatrix[row][col]= new ReptileHabitat ("R"+id,9,5,Usage.EMPTY,"METAL",ReptileType.AMPHIBIAN);
+				id++;
+			}
+		}
+		
+	}
+
+	/**
+    * Description: This method will initialize the habitat were the cats are going to be sent<br>
+    * <b> pre:</b> Constructor class must be activated first<br>
+    * <b> pos:</b> Cat habitat is now available to receive animals<br>
+    */
+
+	private void initializateCat (){
+		int id=1;
+		
+		for(int row=MINROWCAT; row<=MAXROWCAT; row++){
+			for(int col=MINCOLCAT; col<=MAXCOLCAT;col++){
+
+				habitatMatrix[row][col]= new CatHabitat("C"+id,5,3,Usage.EMPTY,8,90);
+				id++;
+			}
+		}
+		
+	}
+
+	/**
+    * Description: This method will initialize the habitat were the bunnies are going to be sent<br>
+    * <b> pre:</b> Constructor class must be activated first<br>
+    * <b> pos:</b> Bunny habitat is now available to receive animals<br>
+    */
+
+	private void initializateBunny (){
+		int id=1;
+		
+		for(int row=MINROWBUNNY; row<=MAXROWBUNNY; row++){
+			for(int col=MINCOLBUNNY; col<=MAXCOLBUNNY;col++){
+				habitatMatrix[row][col]= new BunnyHabitat ("B"+id,5,8,Usage.EMPTY,"ORCHID",3);
+				id++;
+			}
+		}
+		
+	}
+
+
+	/**
+    * Description: This method will add a pet to the habitatMatrix<br>
+    * <b> pos:</b> depending of the Specie of the pet that is added, the counter of each type of pet will add ++ <br>
+    * @param petName String
+   	* @param petAge int
+   	* @param petSpecie Specie
+  	* @param owner Owner
+   	* @param day int, days that the pet will be on the habitat
+  	* @param tryy int, var to control if the pet is healthy or sick
+  	* @return out, String that contains a message with an error or a succesfull message
+    */
+	public String addNurseryPet (String petName, int petAge, Specie petSpecie,Owner owner,int day,int tryy) {
+		String out= "";
+		int option=-1;
+		boolean cat=false;
+		boolean dog=false;
+		boolean reptile=false;
+		boolean bunny=false;
+		boolean bird=false;
+		int number=tryy;
+		if (petSpecie==Specie.DOG){
+			option=0;
+			}else if (petSpecie==Specie.CAT){
+			option=1;
+			}else if(petSpecie==Specie.BUNNY){
+			option=2;
+			}else if(petSpecie==Specie.REPTILE){
+			option=3;
+			}else if(petSpecie==Specie.BIRD){
+			option=4;
+		}
+
+		switch(option){
+
+			case 1:
+
+				for(int row=MINROWCAT;!cat && row<=MAXROWCAT; row++){
+					for(int col=MINCOLCAT;!cat && col<=MAXCOLCAT;col++){
+
+						if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+							Pet p= new Pet(petName,petAge,petSpecie,owner,day);
+							habitatMatrix[row][col].setNurseryPet(p);
+							if(number==1){
+								habitatMatrix[row][col].setUsage(Usage.OCCUPIED_HEALTHY);
+								healthyPet++;
+							}else {habitatMatrix[row][col].setUsage(Usage.OCCUPIED_SICK);
+							sickPet++;}
+							
+							out= "Your cat was added successfully" + ", the pet will be on the habitat with the identificator: " + habitatMatrix[row][col].getIdentificator();
+							cat=true;
+							catCount++;
+
+
+						}else {out="There's no space to save your cat, sorry";}
+					}
+				}
+
+			break;
+			case 0:
+
+				for(int row=MINROWDOG; !dog && row<=MAXROWDOG; row++){
+					for(int col=MINCOLDOG;!dog && col<=MAXCOLDOG;col++){
+
+						if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+							Pet p= new Pet(petName,petAge,petSpecie,owner,day);
+							habitatMatrix[row][col].setNurseryPet(p);
+							if(number==1){
+								habitatMatrix[row][col].setUsage(Usage.OCCUPIED_HEALTHY);
+								healthyPet++;
+							}else {habitatMatrix[row][col].setUsage(Usage.OCCUPIED_SICK);
+							sickPet++;}
+							out="Your dog was added successfully" + ", the pet will be on the habitat with the identificator: " + habitatMatrix[row][col].getIdentificator();
+							dog=true;
+							dogCount++;
+							
+						}else{ out="There's no space to save your dog, sorry";}
+						
+					}
+				}
+			break;
+			case 3:
+				for(int row=MINROWREPTILE; !reptile && row<=MAXROWREPTILE; row++){
+					for(int col=MINCOLREPTILE;!reptile && col<=MAXCOLREPTILE;col++){
+
+						if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+							Pet p= new Pet(petName,petAge,petSpecie,owner,day);
+							habitatMatrix[row][col].setNurseryPet(p);
+							if(number==1){
+								habitatMatrix[row][col].setUsage(Usage.OCCUPIED_HEALTHY);
+								healthyPet++;
+							}else {habitatMatrix[row][col].setUsage(Usage.OCCUPIED_SICK);
+							sickPet++;}
+							out="Your reptile was added successfully" + ", the pet will be on the habitat with the identificator: " + habitatMatrix[row][col].getIdentificator();
+							reptile=true;
+							reptileCount++;
+							
+						}else{ out="There's no space to save your reptile, sorry";}
+						
+					}
+				}
+			break;
+			case 2:
+				for(int row=MINROWBUNNY; !bunny && row<=MAXROWBUNNY; row++){
+					for(int col=MINCOLBUNNY;!bunny && col<=MAXCOLBUNNY;col++){
+
+						if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+							Pet p= new Pet(petName,petAge,petSpecie,owner,day);
+							habitatMatrix[row][col].setNurseryPet(p);
+							if(number==1){
+								habitatMatrix[row][col].setUsage(Usage.OCCUPIED_HEALTHY);
+								healthyPet++;
+							}else {habitatMatrix[row][col].setUsage(Usage.OCCUPIED_SICK);
+							sickPet++;}
+							out="Your bunny was added successfully" + ", the pet will be on the habitat with the identificator: " + habitatMatrix[row][col].getIdentificator();
+							bunny=true;
+							bunnyCount++;
+							
+						}else {out="There's no space to save your bunny, sorry";}
+						
+					}
+				}
+			break;
+			case 4:
+				for(int row=MINROWBIRD; !bird && row<=MAXROWBIRD; row++){
+					for(int col=MINCOLBIRD;!bird && col<=MAXCOLBIRD;col++){
+
+						if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+							Pet p= new Pet(petName,petAge,petSpecie,owner,day);
+							habitatMatrix[row][col].setNurseryPet(p);
+							if(number==1){
+								habitatMatrix[row][col].setUsage(Usage.OCCUPIED_HEALTHY);
+								healthyPet++;
+							}else {habitatMatrix[row][col].setUsage(Usage.OCCUPIED_SICK);
+							sickPet++;}
+							out="Your bird was added successfully" + ", the pet will be on the habitat with the identificator: " + habitatMatrix[row][col].getIdentificator();;
+							bird=true;
+							birdCount++;
+							
+						}else{ out="There's no space to save your bird, sorry";}
+						
+					}
+				}
+			break;
+
+		}
+
+		return out;
+	}
+
+	/**
+    * Description: This method will give a message depending on the name of the pet that is received<br>
+    * @param petName String
+    * @return out, String that contains a message with the information of the pet
+   */
+	public String informationNurseryPet(String petName) {
+
+		String out="";
+		String habitat="";
+		String usage="";
+		for(int f=0;f<habitatMatrix.length;f++){
+			for(int c=0;c<habitatMatrix[0].length;c++){
 	
+				if(habitatMatrix[f][c].getPet()!=null && habitatMatrix[f][c].getPet().getPetName().equals(petName)){
+
+					if(habitatMatrix[f][c].getPet().getSpecie()==Specie.BUNNY){
+						habitat= "Bunny zone";
+					}else if (habitatMatrix[f][c].getPet().getSpecie()==Specie.CAT){
+						habitat="Cat zone";
+					}else if(habitatMatrix[f][c].getPet().getSpecie()==Specie.REPTILE){
+						habitat="Reptile zone";
+					}else if(habitatMatrix[f][c].getPet().getSpecie()==Specie.DOG){
+						habitat="Dog zone";
+
+					}else habitat="Bird zone";
+
+					if(habitatMatrix[f][c].getUsage()==Usage.OCCUPIED_SICK){
+						usage= "Sick";
+					}else if(habitatMatrix[f][c].getUsage()==Usage.OCCUPIED_HEALTHY){
+						usage= "Healthy";
+						
+					}
+
+
+					out += "The pet is on the nursery. " + "\n"+ "Habitat: " + habitat + "\n" + "Habitat identificator: " + habitatMatrix[f][c].getIdentificator() +
+					"\n" + "Status: " + usage;
+					out += "\n" + "\n";
+
+				}
+
+
+			}
+		}
+
+		if(out.equals("")){
+			out="There's no pet with that info";
+		}
+
+		return out;
+	}
+	/**
+    * Description: This method will save on a String var the map of the nursery<br>
+	* @return out, String that contains the map of the nursery
+    */
+	public String showNurseryMap() {
+		String out="";
+
+		for(int i=0;i<habitatMatrix.length;i++){
+			out+="\n";
+			for(int a=0;a<habitatMatrix[0].length;a++){
+				if(habitatMatrix[i][a].getUsage()==Usage.EMPTY){
+					out+= habitatMatrix[i][a].getIdentificator()+ "E";
+					out+=" - ";
+				}
+				if(habitatMatrix[i][a].getUsage()==Usage.OCCUPIED_HEALTHY){
+					out+= habitatMatrix[i][a].getIdentificator()+ "H";
+					out+=" - ";
+				}
+				if(habitatMatrix[i][a].getUsage()==Usage.OCCUPIED_SICK){
+					out+= habitatMatrix[i][a].getIdentificator()+ "S";
+					out+=" - ";
+				}
+
+
+			}
+
+		}
+
+
+
+
+		return out;
+	}
+	/**
+    * Description: This method will give the information of an habitat depending on its identificator<br>
+    * @param identificator String, identificator of the habitat
+    * @return information, String that contains all the information of the habitat specificated
+    */
+	public String habitatInformation(String identificator) {
+		String information=null;
+		String specie="";
+
+		for(int row=0; row<habitatMatrix.length; row++){
+			for(int col=0; col<habitatMatrix[0].length;col++){
+
+				if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator)){
+
+
+					if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
+
+						information= "The habitat is empty." + "\n"+ 
+						"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+						"Length: " + habitatMatrix[row][col].getLength() + "\n" +
+						 "Width: "+habitatMatrix[row][col].getWidth () + "\n";
+
+					}
+					if (habitatMatrix[row][col].getUsage()==Usage.OCCUPIED_HEALTHY){
+						if(habitatMatrix[row][col].getPet().getSpecie()==Specie.BUNNY){
+
+							specie="BUNNY";
+							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5" + "\n" +
+					 		"Width: "+"8" + "\n"+
+					 		"Plant type: "+ "ORCHID" + "\n"+
+					 		"Total plants: "+ "3";
+					 		information+="\n"+"===Pet information===" + "\n" + 
+					 		"Pet specie: " + specie + "\n" +
+					 		"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+
+						}else if (habitatMatrix[row][col].getPet().getSpecie()==Specie.DOG){
+							specie="DOG";
+							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5 meters" + "\n" +
+					 		"Width: "+"3 meters" + "\n"+
+					 		"Amount of toys: "+ "3";
+
+					 		information+="\n"+"===Pet information===" + "\n" + 
+					 		"Pet specie: " + specie + "\n" +
+					 		"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+ "Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+					 		
+
+						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.CAT){
+							specie="CAT";
+							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5 meters" + "\n" +
+					 		"Width: "+"3 meters" + "\n"+
+						 	"Height: "+ "8 meters" + "\n" +
+						 	"Max weight: "+ "90 kg";
+						 	information+="\n"+"===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+
+						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.REPTILE){
+							specie="REPTILE";
+							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "9 meters" + "\n" +
+					 		"Width: "+"5 meters" + "\n"+
+						 	"Material" +"METAL" + "\n" +
+						 	"Aquarium type: " + "AMPHIBIAN";
+						 	information+="\n"+"===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+
+
+						}else {
+
+							specie="BIRD";
+							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "6.5 meters" + "\n" +
+					 		"Width: "+"5.3 meters" + "\n"+
+						 	"Height" + "5 meters" + "\n"+
+						 	"Max birds: " + "8" + "\n" + 
+						 	"Cage type: " + "LAND";
+						 	information+= "\n"+ "===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+						}
+							
+
+
+
+
+					}
+					if (habitatMatrix[row][col].getUsage()==Usage.OCCUPIED_SICK){
+						if(habitatMatrix[row][col].getPet().getSpecie()==Specie.BUNNY){
+							specie="BUNNY";
+						}else if (habitatMatrix[row][col].getPet().getSpecie()==Specie.DOG){
+							specie="DOG";
+
+						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.CAT){
+							specie="CAT";
+
+						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.REPTILE){
+							specie="REPTILE";
+
+						}else specie="BIRD";
+						information= "The habitat is occupied with a SICK pet." + "\n"+ 
+						"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+						"Length: " + habitatMatrix[row][col].getLength() + "\n" +
+					 	"Width: "+habitatMatrix[row][col].getWidth () + "\n";
+					 	information+="===Pet information===" + "\n" + 
+					 	"Pet specie: " + specie + "\n" +
+					 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n";
+
+					}
+
+
+				}
+
+
+
+			}
+		}
+		if(information==null){
+		information="There's no habitat with that identificator";
+		}
+		return information;
+		
+	}
+	/**
+    * Description: This method will give the statistics of the nursery<br>
+    * @return statistics, Var that store all the statistsics of the nursery
+    */
+	public String nurseryStatistics() {
+		String statistics="";
+		double totalCount= birdCount+reptileCount+bunnyCount+dogCount+catCount;
+
+		double percentage;
+
+		statistics+= "===CAT==="+ "\n" +
+		"Cat occupancy percentage: " + (catCount/9)*100 + " %" + "\n";
+
+		statistics+="===DOG===" + "\n" +
+		"Dog occupancy percentage: " + (dogCount/9)*100 + " %" + "\n";
+
+		statistics+="===BUNNY===" + "\n" +
+		"Bunny occupancy percentage: " + (bunnyCount/4)*100 + " %" + "\n";
+
+		statistics+="===REPTILE===" + "\n" +
+		"Reptile occupancy percentage: " + (reptileCount/4)*100 + " %" + "\n";
+
+		statistics+="===BIRD===" + "\n" +
+		"Bird occupancy percentage: " + (birdCount/4)*100 + " %"+ "\n" + "\n";
+
+		// General ocupation
+		statistics+="===GENERAL OCUPATIONS===" + "\n" +
+		"General occupancy percentage: " + (totalCount/MAXHABITATS)*100 + " %" + "\n";
+
+		// Healthy && Sick
+
+		statistics+="===HEALTHY===" + "\n" +
+		"Healthy occupancy percentage: " + (healthyPet/totalCount)*100 + " %" + "\n";
+		statistics+="===SICK===" + "\n" +
+		"Sick occupancy percentage: " + (sickPet/totalCount)*100 + " %" + "\n";
+
+
+
+		return statistics;
+	}
+
+
+
+
+
 
 
 
 }
+
+
+
+
+
+		
+	
+
+
+
+		
+
+	
+	
+	
+	
+	
+
+
+
+
 
 
 

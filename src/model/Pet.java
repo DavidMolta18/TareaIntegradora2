@@ -42,7 +42,10 @@ private Specie specie;
 * Description: Relation with the class Veterinary that allows the pet to be relationated with a personal vet and use its methods
 */
 private Veterinary aVet;
-
+/**
+* Description: This var will store the days that the pet will stay on nursery
+*/
+private int nurseryDay;
 
 // set
 public void setStatus (Status status){
@@ -54,6 +57,9 @@ public void setaVet(Veterinary aVet) {
 }
 
 // get
+public int getDay (){
+	return nurseryDay;
+}
 public Owner getOwner () {
 	
 	return owner;
@@ -79,7 +85,13 @@ public Veterinary getaVet () {
 
 	return aVet;
 }
+public Specie getSpecie (){
+	return specie;
+}
 
+public int getPetAge () {
+	return petAge;
+}
 
 
 
@@ -140,6 +152,30 @@ public Pet (String petName, int petAge,Specie specie, String petSymptoms, Owner 
 
 
 }
+
+	/**
+   * Description: This method creates an object of the class Pet <br>
+   * <b> pos:</b>The atributes will be initialized with a value <br>
+   * @param petName String
+   * @param petAge int
+   * @param specie Specie
+   * @param owner Owner
+	*@param nurseryDay int
+
+   */
+
+public Pet(String petName, int petAge,Specie specie,Owner owner,int nurseryDay){
+
+	this.petName=petName;
+	this.petAge=petAge;
+	this.specie=specie;
+	this.owner=owner;
+	this.nurseryDay=nurseryDay;
+
+}
+
+
+
 
 
 

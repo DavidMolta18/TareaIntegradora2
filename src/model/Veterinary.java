@@ -91,4 +91,13 @@ public class Veterinary {
 	}
 
 
+	public String toString() {
+
+		String out= name + lastName + idNumber + uniqueVet ;
+
+		return out;
+
+	}
+
+
 }
