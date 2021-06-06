@@ -210,7 +210,7 @@ public class Center {
    * Description: This is the constructor of the class center <br>
    * <b> pre:</b> User must enter a name in the menu to start the center<br>
    * <b> pos:</b> Initialize veterinaryarray,petarray,noattended,petNumber,veterinaryNumber,habitatMatrix and call all the methods to initialize the animal habitats  <br>
-   * @param name String
+
    */
 
 

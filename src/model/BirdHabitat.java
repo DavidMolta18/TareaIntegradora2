@@ -24,7 +24,7 @@ public class BirdHabitat extends Habitat{
    * @param usage Usage
    * @param height double
    * @param maxBirds int
-   * @param cageTyoe CageTyoe
+   * @param cageType CageTyoe
    */
 
 	public BirdHabitat (String habitatIdentificator,double length,double width,Usage usage,double height,int maxBirds,CageType cageType){

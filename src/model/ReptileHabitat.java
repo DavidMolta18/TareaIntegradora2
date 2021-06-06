@@ -20,6 +20,7 @@ public class ReptileHabitat extends Habitat {
    * @param width double
    * @param usage Usage
    * @param material String
+   * @param reptileType ReptileType
    */
 
 	public ReptileHabitat (String habitatIdentificator,double length,double width,Usage usage,String material,ReptileType reptileType){

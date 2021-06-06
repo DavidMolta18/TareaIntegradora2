@@ -20,7 +20,8 @@ public class BunnyHabitat extends Habitat {
    * @param length double
    * @param width double
    * @param usage Usage
-   * @param plant Plant
+   * @param plantType String
+   * @param plantNumber int
    */
 
 	public BunnyHabitat (String habitatIdentificator,double length,double width,Usage usage,String plantType,int plantNumber){
