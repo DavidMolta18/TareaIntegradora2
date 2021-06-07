@@ -1248,7 +1248,7 @@ public class Center {
 						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 
 
-						}else {
+						}else if (habitatMatrix[row][col].getPet().getSpecie()==Specie.BIRD) {
 
 							specie="BIRD";
 							information= "The habitat is occupied with a HEALTHY pet." + "\n"+ 
@@ -1266,9 +1266,6 @@ public class Center {
 						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 						}
 							
-
-
-
 
 					}
 					if (habitatMatrix[row][col].getUsage()==Usage.OCCUPIED_SICK){
@@ -1329,7 +1326,7 @@ public class Center {
 						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
 						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
 						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
-						}else specie="BIRD";
+						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.BIRD){
 							specie="BIRD";
 							information= "The habitat is occupied with a SICK pet." + "\n"+ 
 							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
@@ -1344,6 +1341,7 @@ public class Center {
 						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
 						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
 						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
+						 }
 
 					}
 
