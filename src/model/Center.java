@@ -922,7 +922,7 @@ public class Center {
 		
 		for(int row=MINROWBUNNY; row<=MAXROWBUNNY; row++){
 			for(int col=MINCOLBUNNY; col<=MAXCOLBUNNY;col++){
-				habitatMatrix[row][col]= new BunnyHabitat ("B"+id,5,8,Usage.EMPTY,"ORCHID",3);
+				habitatMatrix[row][col]= new BunnyHabitat ("BN"+id,5,8,Usage.EMPTY,"ORCHID",3);
 				id++;
 			}
 		}
@@ -1134,7 +1134,9 @@ public class Center {
 	* @return out, String that contains the map of the nursery
     */
 	public String showNurseryMap() {
-		String out="";
+		String out="C is for Cat, D is for Dog, BN is for Bunny, B is for Bird and R is for Reptile" + "\n"+
+		"E= EMPTY, S=Sick, H= Healthy ///" + "IDENTIFICATOR + STATE";
+
 
 		for(int i=0;i<habitatMatrix.length;i++){
 			out+="\n";
