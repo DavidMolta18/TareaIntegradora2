@@ -622,11 +622,13 @@ public class Center {
 				}else {
 					System.out.println("Select a correct option");
 					exit=true;
+					inconsult=true;
 				}
 
 
 			}else if (a==119){
-				System.out.println("There's no pet /Or/ Incorrect name /Or/ The pet is not in consult /Or/ The vet is not attending this pet"); // CHECKE
+				System.out.println("There's no pet /Or/ Incorrect name /Or/ The pet is not in consult /Or/ The vet is not attending this pet");
+				inconsult=true; // CHECKE
 			}
 
 
