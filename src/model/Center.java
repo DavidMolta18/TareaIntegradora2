@@ -1274,26 +1274,76 @@ public class Center {
 					if (habitatMatrix[row][col].getUsage()==Usage.OCCUPIED_SICK){
 						if(habitatMatrix[row][col].getPet().getSpecie()==Specie.BUNNY){
 							specie="BUNNY";
+							information= "The habitat is occupied with a SICK pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5" + "\n" +
+					 		"Width: "+"8" + "\n"+
+					 		"Plant type: "+ "ORCHID" + "\n"+
+					 		"Total plants: "+ "3";
+					 		information+="\n"+"===Pet information===" + "\n" + 
+					 		"Pet specie: " + specie + "\n" +
+					 		"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 						}else if (habitatMatrix[row][col].getPet().getSpecie()==Specie.DOG){
 							specie="DOG";
+							information= "The habitat is occupied with a SICK pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5 meters" + "\n" +
+					 		"Width: "+"3 meters" + "\n"+
+					 		"Amount of toys: "+ "3";
 
+					 		information+="\n"+"===Pet information===" + "\n" + 
+					 		"Pet specie: " + specie + "\n" +
+					 		"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+					 		"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+ "Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.CAT){
 							specie="CAT";
-
+							information= "The habitat is occupied with a SICK pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5 meters" + "\n" +
+					 		"Width: "+"3 meters" + "\n"+
+						 	"Height: "+ "8 meters" + "\n" +
+						 	"Max weight: "+ "90 kg";
+						 	information+="\n"+"===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 						}else if(habitatMatrix[row][col].getPet().getSpecie()==Specie.REPTILE){
 							specie="REPTILE";
-
+							
+							information= "The habitat is occupied with a SICK pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "9 meters" + "\n" +
+					 		"Width: "+"5 meters" + "\n"+
+						 	"Material" +"METAL" + "\n" +
+						 	"Aquarium type: " + "AMPHIBIAN";
+						 	information+="\n"+"===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 						}else specie="BIRD";
-						information= "The habitat is occupied with a SICK pet." + "\n"+ 
-						"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
-						"Length: " + habitatMatrix[row][col].getLength() + "\n" +
-					 	"Width: "+habitatMatrix[row][col].getWidth () + "\n";
-					 	information+="===Pet information===" + "\n" + 
-					 	"Pet specie: " + specie + "\n" +
-					 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
-					 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
-					 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
-					 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n";
+							specie="BIRD";
+							information= "The habitat is occupied with a SICK pet." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "6.5 meters" + "\n" +
+					 		"Width: "+"5.3 meters" + "\n"+
+						 	"Height" + "5 meters" + "\n"+
+						 	"Max birds: " + "8" + "\n" + 
+						 	"Cage type: " + "LAND";
+						 	information+= "\n"+ "===Pet information===" + "\n" + 
+						 	"Pet specie: " + specie + "\n" +
+						 	"Pet name: " + habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Age: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Pet Specie: "	+ habitatMatrix[row][col].getPet().getPetName() + "\n" +
+						 	"Days to be on the nursery: " + habitatMatrix[row][col].getPet().getDay() + "\n"+"Pet owner name: "+ habitatMatrix[row][col].getPet().getOwner().getownerName();
 
 					}
 
