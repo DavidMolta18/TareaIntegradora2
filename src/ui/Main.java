@@ -441,8 +441,10 @@ public void endConsult (){
 		petCenter.endConsult(id,petName,option);
 		break;
 		case 2:
-		petCenter.endConsult(id,petName,option);
-		sendHospitalization();
+		if(!(petCenter.endConsult(id,petName,option))){
+			sendHospitalization();
+		}
+		
 		break;
 	}
 

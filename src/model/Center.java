@@ -558,11 +558,12 @@ public class Center {
 	* @param id String
 	* @param petName String
 	* @param option int 
+	* @return inconsult boolean, this will help the program to know if the vet is in consult in order to continue with the normal logic 
 	
 	*/
 
 
-	public void endConsult (String id, String petName,int option) {
+	public boolean endConsult (String id, String petName,int option) {
 
 		boolean exit=false;
 		boolean inconsult=true;
@@ -631,7 +632,7 @@ public class Center {
 
 		}
 
-
+		return inconsult;
 	}
 
 	/**
