@@ -1175,20 +1175,85 @@ public class Center {
 		String information=null;
 		String specie="";
 
+
+
+			for(int row=MINROWBUNNY; row<=MAXROWBUNNY; row++){
+				for(int col=MINCOLBUNNY; col<=MAXCOLBUNNY;col++){
+					if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator) && habitatMatrix[row][col].getPet()==null){
+							information="===BUNNY ZONE===" +"\n"+ "The habitat is EMPTY." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5" + "\n" +
+					 		"Width: "+"8" + "\n"+
+					 		"Plant type: "+ "ORCHID" + "\n"+
+					 		"Total plants: "+ "3";
+					}
+				}
+			}
+
+			for(int row=MINROWCAT; row<=MAXROWCAT; row++){
+				for(int col=MINCOLCAT; col<=MAXCOLCAT;col++){
+					if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator) && habitatMatrix[row][col].getPet()==null){
+						information= "===CAT ZONE===" +"\n"+"The habitat is EMPTY." + "\n"+ 
+						"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+						"Length: " + "5 meters" + "\n" +
+					 	"Width: "+"3 meters" + "\n"+
+						 "Height: "+ "8 meters" + "\n" +
+						 "Max weight: "+ "90 kg";
+					}
+
+				}
+			}
+
+			for(int row=MINROWBIRD; row<=MAXROWBIRD; row++){
+				for(int col=MINCOLBIRD; col<=MAXCOLBIRD;col++){
+					if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator) && habitatMatrix[row][col].getPet()==null){
+						information= "===BIRD ZONE===" +"\n"+"The habitat is EMPTY." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "6.5 meters" + "\n" +
+					 		"Width: "+"5.3 meters" + "\n"+
+						 	"Height" + "5 meters" + "\n"+
+						 	"Max birds: " + "8" + "\n" + 
+						 	"Cage type: " + "LAND";
+					}
+
+				}
+			}	
+			for(int row=MINROWREPTILE; row<=MAXROWREPTILE; row++){
+				for(int col=MINCOLREPTILE; col<=MAXCOLREPTILE;col++){
+					if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator) && habitatMatrix[row][col].getPet()==null){
+						information="===REPTILE ZONE===" + "\n"+"The habitat is EMPTY." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "9 meters" + "\n" +
+					 		"Width: "+"5 meters" + "\n"+
+						 	"Material" +"METAL" + "\n" +
+						 	"Aquarium type: " + "AMPHIBIAN";
+					}
+
+				}
+			}
+
+			for(int row=MINROWDOG; row<=MAXROWDOG; row++){
+				for(int col=MINCOLDOG; col<=MAXCOLDOG;col++){
+					if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator) && habitatMatrix[row][col].getPet()==null){
+						information= "===DOG ZONE===" + "\n" + "The habitat is EMPTY." + "\n"+ 
+							"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
+							"Length: " + "5 meters" + "\n" +
+					 		"Width: "+"3 meters" + "\n"+
+					 		"Amount of toys: "+ "3";
+					}
+
+				}
+			}
+
+
+		
+
 		for(int row=0; row<habitatMatrix.length; row++){
 			for(int col=0; col<habitatMatrix[0].length;col++){
 
 				if(habitatMatrix[row][col].getIdentificator().equalsIgnoreCase(identificator)){
 
 
-					if(habitatMatrix[row][col].getUsage()==Usage.EMPTY){
-
-						information= "The habitat is empty." + "\n"+ 
-						"Identificator: " + habitatMatrix[row][col].getIdentificator() + "\n" +
-						"Length: " + habitatMatrix[row][col].getLength() + "\n" +
-						 "Width: "+habitatMatrix[row][col].getWidth () + "\n";
-
-					}
 					if (habitatMatrix[row][col].getUsage()==Usage.OCCUPIED_HEALTHY){
 						if(habitatMatrix[row][col].getPet().getSpecie()==Specie.BUNNY){
 
